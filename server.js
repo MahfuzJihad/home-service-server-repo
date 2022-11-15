@@ -90,18 +90,18 @@ app.get('/reviews/:id', async (req, res) => {
     });
 });
 
-// app.get('/reviews', async (req, res) =>{
-//   let query = {};
-//   if (req.query.email){
-//     query ={
-//     email: req.query.email
-//     };
+app.get('/reviews', async (req, res) =>{
+  let query = {};
+  if (req.query.email){
+    query ={
+    email: req.query.email
+    };
    
-//   }
-//   const cursor = req.params.id;
-//   const dbConnect = dbo.getDb();
+  }
+  const cursor = req.params.id;
+  const dbConnect = dbo.getDb();
  
-// })
+})
 
 
 
