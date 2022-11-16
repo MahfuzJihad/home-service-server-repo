@@ -44,22 +44,23 @@ app.get('/service/:id', async (req, res) => {
     });
 })
 
-app.post('/service/:id', async(req, res)=> {
-  const review = req.body;
-  console.log(service);
-  res.json(service);
+app.post('/service', async(req, res)=> {
+  const service = req.body;
   const dbConnect = dbo.getDb();
   dbConnect
   .collection('service')
-  .insertOne(service), function(err, result){
-
-  };
-})
+  .insertOne(service), function(err, result) {
+    if(err) {
+      res.status(400).send('Error to posting service');
+    }else{
+      res.status(201).json(result);
+    }
+  }
+  
+});
 
 app.post('/review', async (req, res) => {
   const review = req.body;
-  console.log(review);
-  res.json(review);
   const dbConnect = dbo.getDb();
   dbConnect
     .collection('review')
