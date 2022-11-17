@@ -43,36 +43,36 @@ app.get('/service/:id', async (req, res) => {
       }
     });
 })
-
-app.post('/service', async(req, res)=> {
+app.post('/service', async(req, res) => {
   const service = req.body;
+  console.log(service);
+
   const dbConnect = dbo.getDb();
-  dbConnect
-  .collection('service')
-  .insertOne(service), function(err, result) {
-    if(err) {
+  const results = await dbConnect.collection('service')
+  .insertOne(service, function(err, result) {
+    if(err){
       res.status(400).send('Error to posting service');
     }else{
       res.status(201).json(result);
     }
-  }
-  
+  })
 });
 
-app.post('/review', async (req, res) => {
+
+app.post('/review', async(req, res) => {
   const review = req.body;
-  const dbConnect = dbo.getDb();
-  dbConnect
-    .collection('review')
-    .insertOne(review), function(err, result ){
-      if(err){
-        res.status(400).send('Error to posting review');
-      }else{
-        res.status(201).json(result);
-      }
-    };
-});
+  console.log(review);
 
+  const dbConnect = dbo.getDb();
+  const results = await dbConnect.collection('review')
+  .insertOne(review, function(err, result) {
+    if(err){
+      res.status(400).send('Error to posting service');
+    }else{
+      res.status(201).json(result);
+    }
+  })
+})
 
 
 app.get('/reviews/:id', async (req, res) => {
